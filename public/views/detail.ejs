@@ -1,0 +1,26 @@
+<%- include('./partials/head') %>
+
+<div class = 'detail'>
+    <%if(data.webImage){ %>
+        <!--Slice the images to get other resolutions-->
+        <img
+            srcset= <%-data.webImage.url.slice(0, -3) + "=s200"%>  50w,
+                <%-data.webImage.url.slice(0, -3) + "=s400"%>  100w,  
+                <%-data.webImage.url.slice(0, -3) + "=s600"%>  200w, 
+            sizes="(max-width: 710px) 120px,
+                (max-width: 991px) 193px,
+                278px"
+            src= <%-data.webImage.url.slice(0, -3) + "=s1000" %> 
+            alt= <%- data.title %>         
+        >
+    <% }else{ %>
+        <img src= <%- "/img/placeholder.png" %> alt= <%- data.title %> >
+    <% } %>    
+    <div>
+        <h2><%-data.title%></h2>
+        <h3><%-data.dating.presentingDate%></h3>
+        <p><%-data.description%></p>
+    </div>
+</div>
+
+<%- include('./partials/footer') %>

@@ -1,154 +1,180 @@
-# Real-Time Web @cmda-minor-web 2021 - 2022
+# Server side Rijksmuseum
 
 ## Table of Contents
-- [Synopsis](#synopsis)
 - [Description](#description)
-- [Communication](#communication)
-- [Goals](#goals)
-- [Grading](#grading)
-- [Programme](#programme)
-
-## Synopsis
-- Course: Real-Time Web
-- Course Coordinator: Justus Sturkenboom ([@ju5tu5](https://github.com/ju5tu5))
-- Minor Coordinator(s): Joost Faber ([@joostf](https://github.com/joostf)) Koop Reynders ([@KoopReynders](https://github.com/KoopReynders))
-- Lecturers: Shyanta Vleugel ([@shyanta](https://github.com/shyanta)) & Justus Sturkenboom ([@ju5tu5](https://github.com/ju5tu5))
-- Student Assistants: Daan Korver ([@daankorver](https://github.com/DaanKorver))
-- Credit: 3 ECTS credits
-- Academic year: 2021-2022
-- Programme: Communication and Multimedia Design (full time bachelor)
-- Language: Dutch instructions and English resources
+- [Install Project](#Install)
+- [Server setup](#Server)
+- [Server-worker](#Server-worker)
+- [Activity Diagram](#description)
+- [Optimization](#Diagram)
+- [Tooling](#Tooling)
+- [Issues](#Issues)
 
 ## Description
-During this course you will learn how to build a real-time application. You will learn techniques to setup an open connection between the client and the server. This will enable you to send data in real-time both ways, at the same time.
+To improve the single web page we have made for Rijksmuseum I build a server side application. It was a client side at first, but this comes with some counterpoints. The loading of the page takes some time plus if you have any javascript errors it can be fatal. This will be countered in server side rendering. I explained this in this readme on how I made it work. 
 
-## Communication
-- [Github](https://github.com/cmda-minor-web/real-time-web-2122)
-- [Microsoft Teams](https://teams.microsoft.com/l/channel/19%3a2b5ac900b14c4b68a31dc5dbb380dcbe%40thread.tacv2/06%2520-%2520Real%2520Time%2520web)
-- [Brightspace](https://dlo.mijnhva.nl/d2l/home/324147)
+## Install Project <a name="Install">
+### Clone this repo
+```
+  $ git clone https://github.com/AronPelgrim/web-app-from-scratch-2122.git
+```
 
-If you have questions:
-- [Look at the additional resources]()
-- [Use a search engine like startpage](https://www.startpage.com/)
-- [Ask questions on MS Teams](https://teams.microsoft.com/l/channel/19%3a2b5ac900b14c4b68a31dc5dbb380dcbe%40thread.tacv2/06%2520-%2520Real%2520Time%2520web) (please help each other!)
-- [Contact a student-assisstant](#synopsis)
-- [Contact a lecturer](#synopsis)
+### Navigate to the repo
+```
+$ cd web-app-from-scratch-2122
+```
+  
+When you have cloned the repo, it will not work yet. We need to install some packages:
+  1. Install node.js
+  2. Write in the terminal npm install express
+  3. Also install dotenv, nodefetch, nodemon and ejs this way.
+  4. To start the server, write in the terminal npm start.
+  
+  
+## Server setup <a name="Server">
+To begin the trandformation from client side to server side, I first needed to install some packages. The first thing needed was Node.js, thankfully I used this before so I already had it installed. Secondly I needed express.js and ejs. I installed it using the npm package manager via the terminal. The packagemanager then looks like this:
+  
+  ```
+    "name": "myapp",
+    "version": "1.0.0",
+    "description": "server side app",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "nodemon app.js"
+    },
+    "author": "Jeany de Vries",
+    "license": "ISC",
+    "dependencies": {
+      "ejs": "^3.1.6",
+      "express": "^4.17.3"
+    },
+    "devDependencies": {
+      "nodemon": "^2.0.15"
+    }
+  ```
+  
+  (I installed nodemon as well just so it refreshes the page automatically)
+  
+The second thing to do was setting the server up with the packages we have downloaded. A mistake I made was only using node.js for setting up the server. I realised  that I could set up my html very fast, but the css was a bit of a problem. I then asked for help and they said I needed to use express as well. This eventually made things a lot easier. But how did I get it to work? Well I first set up an app with the express method and made it listen to the port I wanted (you also need to import express using the require method). I then wanted to render the index.html. But after some searching I needed to translate the html to ejs. This made the use of the data a lot easier, because javascript can be added to the html elements. To find the ejs file I set the ejs to views with a pathname where it could find it. For the other files I said to find it in the public folder, where I transferred my files in. This is the code below:
+  
+  
+  ```
+  app.get('/', function (req, res) {
+    fetch(`https://www.rijksmuseum.nl/api/nl/collection?key=${api_key}&ps=20&imgonly=true`)
+      .then(async response => {
+        const artWorks = await response.json()
+        res.render('index', {
+            pageTitle: 'Home page', 
+            data: artWorks.artObjects
+        })
+      })
+      .catch(err => res.send(err))
+  })
 
-## Goals
-After finishing this program you can:
-- _deal with real-time complexity;_
-- _handle real-time client-server interaction;_
-- _handle real-time data management;_
-- _handle multi-user support._
+  app.listen(port);
+  ```
+  
+  
+The server now fetches the data when the hashtag is emty, which in this case is my home page. Then I use the response to retrieve my data and render that variable in my ejs. I did this for all my pages. A nice thing with fetching the with the app, is that it can read an id in the hashtag url using :id. This made the detail page easier cause I could just grab the id from the request parameters, instead of having to give the id through javascript as I did before.
+  
+```
+  app.get('/painting/:id', (req, res) => {
+      fetch(`https://www.rijksmuseum.nl/api/nl/collection/${req.params.id}?key=${api_key}&imgonly=true`)
+```
+   
+## Server-worker <a name="Server-worker">
+Now that everything was running on the server, it needed a sort of backup. What if the page went offline. The user still needs to have some visuals or have some pages in a storage. That's where the service worker is for. 
 
-## Grading
-Your efforts will be graded using a single point rubric (see below). You will have to pass the criterion (centre column) to pass the course. During the test you will be consulted and will be given feedback on things we think deficient and things we think are an improvement on the criterion.
+To add the service worker to our project I made a main.js script. It checks if it is supported, if so register the service worker on load. Then check if it has any differences, so yes update the service worker. Now when I refresh the page, the service worker is added. But it is empty so we need to add some code to it!
 
-| Deficiency | Criterion | Improvement |
-|:--|:--|:--|
-|  | *Project* Your app is working and published on Heroku. Your project is thoroughly documented in the `README.md` file in your repository. Included are a description of the data-lifecycle, real-time events and external data source used by your app. |  |
-|  | *Complexity* You’ve implemented enough real-time functionality for us to test your comprehension of the subject. A lot of functionality is self-written. You are able to manipulate online examples live. |  |
-|  | *Client-server interaction* By interacting with the app, a user can influence the data model of the server in real time by directly modifying data OR by influencing API requests between server and source. The student has set up the data manipulations. |  |
-|  | *Data management* The server maintains a data model and each client is continuously updated with the correct data. |  |
-|  | *Multi-user support* Multiple clients can connect to the server. Interaction works as expected and is not dependent on the number of clients. You can explain how your app approaches this. |  |
+```
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/serviceWorker.js')
+      .then(function(registration) {
+        return registration.update();
+        })
+      });
+   }
+```
+  
+A service worker has multiple functions, like install, fetch etc. 
+We first needed the function "install" to install the service worker and precache our main elements of our site. 
+When we are installing the service worker we also want to add the assets to it in the cache storage. I made an array with the essentails I wanted. It then adds it all to the cache during the install, see code below. 
+  
+```
+  const CORE_CACHE_VERSION = 'v8'
+  const CORE_ASSETS = [
+    '/js/main.js',
+    '/css/stylesheet.css',
+    `/offline`
+  ];
 
-## Programme
+  //precaching
+  self.addEventListener('install', event => {
+      event.waitUntil(
+      caches.open(CORE_CACHE_VERSION)
+      .then(cache => cache.addAll(CORE_ASSETS))
+      .then(() => self.skipWaiting()))
+   });
+```
+  
+Now our offline page is running with our css, but we also want to see the pages. This is where the fetch function comes in.
+  
+On our site we fetch for every new site we go to, because we load new data. This can take a while and is bad for our performance plus it will not work if we are offline. 
+  
+In the fetch listener of our service worker we simply check if is one of our core elements or an html page. If it is an html page we open up a new cache called html-cache where I store all the loaded html pages. Then if the page is not yet in the cache we add the newly loaded page to it. And if for some reason you are offline and you check a site that is not in the cache yet, you will go to the offline page. 
+  
+```
+  self.addEventListener('fetch', event => {
+    if (isCoreGetRequest(event.request)) 
+    {
+        console.log('Core get request: ', event.request.url);
+        // cache only strategy
+        event.respondWith(
+        caches.open(CORE_CACHE_VERSION)
+        .then(cache => cache.match(event.request.url)))
+    } 
+    else if (isHtmlGetRequest(event.request)) 
+    {
+        // generic fallback
+        event.respondWith(
+            caches.open('html-cache')
+            .then(cache => cache.match(event.request.url))
+            .then(response => response ? response : fetchAndCache(event.request, 'html-cache'))
+            .catch(e => {
+                return caches.open(CORE_CACHE_VERSION)
+                .then(cache => cache.match('/offline'))
+            }))
+    }
+```
+  
+## Activity Diagram <a name="Diagram">
+![image](https://user-images.githubusercontent.com/44086608/161763795-fad8a552-2ed7-41df-990d-c171a5fe73ca.png)
+  
+## Optimilization  <a name="Optimization">
+Now that everything is working, we need to optimize. We want the user to have a nice experience with our site. We don't want our users waiting for our site to load. To do that I made some optimilizatations:
+1. I used the compression package to compress some images, so they will load faster.
+    ```app.use(compression())```
+2. I wanted the javascript to load after all the html elements were loaded, so that the user saw all the visuals from the site. I did that by writing defer after the       script. ```<script type="module" src="/js/main.js" defer></script>```
+3. The third thing I did was removing some items from the cache storage. I didn't want to overflow the cache storage with old html caches. So I set a limit to 40 and if it went over the limit it will delete the last item. Sadly new items are being added on the last index, and the last index will be deleted when it overflows the cache. I need to reorder the cache storage if I want to make it work more perfectly. 
 
-### Daily Schedule
-To keep things simple we use a daily schedule that will be used during normal course days (monday/tuesday). We make exceptions for fridays, on these days a different schedule will be given.
-
-| Time | Who | Activity |
-|:--|:--|:--|
-| *~09:00* | *(Shyanta, Justus)* | *Standup* |
-| 09:30 | Tribe *+(Shyanta, Justus)* | Talk with crucial information (make sure you attend!) |
-| 11:00 | Tribe | Work on the (day)assignment |
-|  | Team 1 *+(Shyanta)* | Standup |
-|  | Team 2 *+(Justus)* | Standup |
-| 11:20 | Team 3 *+(Shyanta)* | Standup |
-|  | Team 4 *+(Justus)* | Standup |
-| 11.40 | Team 5 *+(Shyanta)* | Standup |
-|  | Team 6 *+(Justus)* | Standup |
-| 12.00 | Team 7 *+(Shyanta)* | Standup |
-|  | Team 8 *+(Justus)* | Standup |
-| 12.20 | Team 9 *+(Shyanta)* | Standup |
-|  | Team 20 *+(Justus)* | Standup |
-| 13:00 | Tribe *+(Daan, Justin)* | Continue work on the (day)assignment |
-| 16:00ish | Tribe | Wrapup |
-
-### Week 1 - Getting a grip
-Goal: Build and deploy a simple but unique real-time app
-
-#### Tuesday 19 April 
-**Talk subjects:** Hit the ground running... [(slides)](https://docs.google.com/presentation/d/1Z-zOIDvFB0P2qGHV0F74n9T4kprgybJ_8GYU-1MaKfM/edit?usp=sharing) Course objective and explanation of the assignment, examples from last year, explanation of real-time, (live coded) bare bone chat app and deployment on Heroku.\
-**Day assignment:** [(assignment)](./course/week-1.md#assignment-1-make-it-so) Make it so *(as a team)*: Implement (code/style/discuss/deploy) basic chat (or other realtime) functionality on your teampage!
-
-#### Friday 22 April
-**Talk subjects:** My first realtime web app! [(slides)](https://docs.google.com/presentation/d/18eftO3epzIXDjdwl3cn5Wq99fkQYCUnExUqq9P72A3k/edit?usp=sharing) Short recap, (local) data management, using (wire) flows for realtime web apps, (live coded) multi-user woordzoeker.\
-**Day assignment:** [(assignment)](./course/week-1.md#assignment-2-make-it-so) Make it so *(individually)*. i) Create (code/style/discuss/deploy) a chat app (or other realtime functionality) based on the examples and ii) add your own unique feature!
-
-### Week 2 - Sockets and data
-Goal: Store, manipulate and share data between server-client   
-
-#### Monday 25 April
-**Talk subjects:** Data driven development?! [(slides)](https://docs.google.com/presentation/d/1WC1DxkQm2eUCTQp7dEfv0cTVMK7zlg3der0P0qP7S5I/edit?usp=sharing) Feedback about last week, final assignment and conditions (rubric), explanation of data management, (live coded) Long polling vs Websockets. \
-**Day assignment:** [(assignment)](./course/week-2.md#assignment-1-proof-of-concept) (Proof of) Concept *(individually)*. i) Create a (3 > 1) concept based on existing data from an API and ii) map this data using modelling techniques.
-
-#### Tuesday 26 April
-**Talk subjects:** Above all else, show the data. [(slides)](https://docs.google.com/presentation/d/1tW4klrDjt1AfWte311uKkfQYwaHwokzQ-ue3a4VphqA/edit?usp=sharing) Securing real-time web apps, offline support, the publication/subscription model and (case study) Quek!\
-**Day assignment:** [(assignment)](./course/week-2.md#assignment-2-proof-of-concept) Proof of concept *(individually)*: i) Create (code/style/discuss/deploy) part of the core functionality for your concept and ii) show the  corresponding data lifecycle diagram.
-
-#### Friday 29 April
-Instead of our talk we will have a [peer review session](./course/peer-review.md). You will read, comment and fire issues on each others code. Doing this is really good for your programming insight and helps others refining/refactoring their code.
-
-| Time | Who | Activity |
-|:--|:--|:--|
-| | Tribe *+(Shyanta, Justus)* | Peer review |
-
-### Week 3 - Dealing with multiple users
-Goal: Handle data sharing and multi-user support 
-
-#### Monday 9 May
-**Talk subjects:** Roll your own... [(slides) ](https://docs.google.com/presentation/d/1Cx9qCo8QQXH5Btbtwg0L61so-wn2OxFQZdphIhbumQk/edit?usp=sharing) Data management, the functional programming trinity (map, filter and reduce). OAuth?!
-**Day assignment:** [(assignment)](./course/week-3.md#assignment-1-data-management)
-
-#### Tuesday 10 May
-**Talk subjects:** Not ignoring the UI-Stack! [(slides)](https://docs.google.com/presentation/d/1ACuUJ-B19hgFN2CCTYH8ClN0WD69ok8ZVnkRGbU0FjA/edit?usp=sharing). Usability, feedback, feedforward etc. in real-time web apps, (case study) postNL loader and FAQ.
-**Day assignment:** [(assignment)](./course/week-3.md#assignment-2-user-testing)
-
-#### Friday 13 May
-We will have our final [peer review session](./course/peer-review.md). You will read, comment and fire issues on each others code. Doing this helps others dotting the i’s on their project.
-
-| Time | Who | Activity |
-|:--|:--|:--|
-| | Tribe *+(Shyanta, Justus)* | Peer review |
-| | Tribe *+(Shyanta, Justus)* | Finalize your assignment |
-| 16.00 | Tribe *+(Shyanta, Justus)* | (drinks?!) |
+After all the optimizing, this was the result: 
+  
+![image](https://user-images.githubusercontent.com/44086608/161755517-13b1e658-d32b-45d9-b2ce-7918fef2421d.png)
 
 
-<!-- Here are some hints for your project! -->
-
-<!-- Start out with a title and a description -->
-
-<!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
-
-<!-- Add a link to your live demo in Github Pages 🌐-->
-
-<!-- replace the code in the /docs folder with your own, so you can showcase your work with GitHub Pages 🌍 -->
-
-<!-- Maybe a table of contents here? 📚 -->
-
-<!-- ☝️ replace this description with a description of your own work -->
-
-<!-- How about a section that describes how to install this project? 🤓 -->
-
-<!-- ...but how does one use this project? What are its features 🤔 -->
-
-<!-- What external data source is featured in your project and what are its properties 🌠 -->
-
-<!-- This would be a good place for your data life cycle ♻️-->
-
-<!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
-
-<!-- We all stand on the shoulders of giants, please link all the sources you used in to create this project. -->
-
-<!-- How about a license here? When in doubt use GNU GPL v3. 📜  -->
+## Tooling <a name="Tooling">
+I set up tooling for nodemon in my packages.json. I wanted to start the project with nodemon. So in my script I said in the start, nodemon app.js. This way when I type npm start in my terminal I start the script app.js using nodemon. 
+  
+```
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "npx nodemon app.js"
+  }
+```
+  
+## Issues <a name="Issues">
+If you see any issues in my code or spots that need improvements let me know. You can file an issue in this repository. Thank you!
