@@ -14,7 +14,8 @@
     "compression": "^1.7.4",
     "ejs": "^3.1.6",
     "express": "^4.17.3",
-    "node-fetch": "^3.2.3"
+    "node-fetch": "^3.2.3",
+    "socket.io": "^4.4.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
