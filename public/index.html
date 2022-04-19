@@ -17,13 +17,44 @@
     </section>
 
     <div class="container">
-
+      <canvas	width="700" height="700"></canvas>
+      <div class="controls">
+        <ul>
+          <li class="white"></li>
+          <li class="darkgrey"></li>
+          <li class="lightBlue "></li>
+          <li class="lightPink"></li>
+          <li class="lightPurple"></li>
+          <li class="lightGreen"></li>
+          <li class="lightYellow"></li>
+          <li class="lightOrange"></li>
+          <li class="lightRed"></li>
+          <li class="lightBrown"></li>
+          <li class="grey"></li>
+          <li class="black selected"></li>
+          <li class="blue"></li>
+          <li class="pink"></li>
+          <li class="purple"></li>
+          <li class="green"></li>
+          <li class="yellow"></li>
+          <li class="orange"></li>
+          <li class="red"></li>
+          <li class="brown"></li>
+        </ul>
+        <p id="thickness-section">
+          <label>Brush Thickness</label>
+          <input id="thickness" name="thickness" class = "slider" type="range" min=1 max=100 value=1>
+        </p><br>
+      </div>
     </div>
 
   </main>
 
+	<script src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="drawing.js" type="text/javascript" charset="utf-8"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="main.js"></script>
+
 </body>
 
 </html>
