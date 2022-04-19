@@ -1,18 +1,24 @@
-* {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 1em;
-    font-weight: 400;
-    margin: 0 auto;
-    color: white;
+
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
-html {
-    background-color: rgb(68, 68, 68);
-}
+#particle-canvas {
+    width: 100%;
+    height: 100%;
+  }
 
 main {
     display: flex;
-align-content: center;justify-content: center;}
+    align-content: center;
+    justify-content: center;
+}
 
 h1 {
     font-size: 5em;
@@ -34,9 +40,9 @@ h1 {
 
 
 canvas {
-	background: #fff;
+	/* width: 100%; *//* max-width: 700px; *//* max-height: 700px; */color: #fff;
     cursor: crosshair;
-    border-right: 3px solid black;
+    /* border-right: 3px solid black; */
 }
 .controls {
 	width: 100%;
