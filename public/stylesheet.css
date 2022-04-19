@@ -1,19 +1,31 @@
-button.plsChat {position: fixed;bottom: 20px;right: 20px;width: 50px;height: 50px;border-radius: 50%;border: 1px solid gray;background: url(https://e7.pngegg.com/pngimages/11/755/png-clipart-computer-icons-chat-room-online-chat-web-chat-message-box-miscellaneous-angle.png);background-repeat: no-repeat;background-position: center;background-size: 70%;z-index: 1;cursor: pointer;}
-.chatroom {position: fixed;bottom: 20px;right: 80px;width: 50%;height: 80%;background-color: #606060;box-shadow: 0 0 5px #a8a8a8;margin: 0 auto;z-index: 2;display: none;}
-.chatroom>button {position: absolute;width: 30px;height: 30px;top: 10px;right: 10px;}
-form {position: absolute;bottom: 0px;width: 100%;left: 0;display: flex;flex-direction: row;flex-wrap: nowrap;justify-content: flex-start;z-index: 2;}
+* {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 0.8em;
+    font-weight: 400;
+    margin: 0 auto;
+}
 
-form input {width: 70%;margin: 10px;height: 40px;}
+html {
+    background-color: rgb(62, 62, 62);
+}
 
-form button {width: 30%;margin: 10px;}
+main {
+    display: flex;
+}
 
-.chatroom ul {margin-top: 60px;height: inherit;padding: 0 10px;overflow-y: scroll;}
+h1 {
+    font-size: 8em;
+    font-weight: 800;
+    text-align: center;
+    color: white;
+}
 
-.chatroom::before {position: absolute;top: 0;left: 0;width: 100%;background-color: #8fa7c5;height: 50px;content: '';}
-.chatroom::after {background-color: #606060;position: absolute;bottom: 0;left: 0;width: 100%;content: '';height: 70px;z-index: 1;}
-
-.chatroom ul>li {color: white;list-style-type: none;width: 100%;overflow-wrap: anywhere;height: fit-content;padding: 5px 0px;text-align: left;}
-
-* {font-family: system-ui;text-align: center;}
-
-h1>span {display: block;font-size: 2rem;border-top: 2px solid black;width: 56%;margin: 20px auto;}
+.container {
+    width: 80vw;
+    height: 80vh;
+    position: absolute;
+    background: rgb(152, 162, 172);
+    top: 50%;
+    transform: translate(11%, -50%);
+    box-shadow: 0px 0px 4px 4px white;
+}
