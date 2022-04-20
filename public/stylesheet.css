@@ -43,11 +43,13 @@ h1 {
 
 
 
-canvas {
-	/* width: 100%; *//* max-width: 700px; *//* max-height: 700px; */color: #fff;
+.drawingCanvas {
+	color: #fff;
     cursor: crosshair;
-    /* border-right: 3px solid black; */
+    width: 700px;
+    height: 700px;
 }
+
 .controls {
 	width: 100%;
 	display: flex;
@@ -247,5 +249,17 @@ button {
 .brown{
     background: #4e3a37;
 }
+
+@media only screen and (max-height: 950px) {
+    .container {
+        width: 800px;
+        height: 500px;
+    }
+
+    .drawingCanvas{
+        width: 700px;
+        height: 500px;
+    }
+  }
 
 
