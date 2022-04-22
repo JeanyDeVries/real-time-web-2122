@@ -2,6 +2,7 @@
     color: white;
     margin: 0 auto;
     font-size: 1em;
+    font-family: 'Baloo 2', cursive;
 }
 
 html,
@@ -11,6 +12,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  background-color: #d3d3d3;
 }
 
 #particle-canvas {
@@ -35,10 +37,10 @@ h1 {
     width: 900px;
     height: 500px;
     position: absolute;
-    background: rgb(70 70 70);
+    background: #da9d81;
     top: 50%;
     transform: translate(0%, -50%);
-    box-shadow: 0px 0px 3px 1px white;
+    border-radius: 10px;/* box-shadow: 0px 0px 3px 1px white; */
 }
 
 
@@ -48,7 +50,7 @@ h1 {
     cursor: crosshair;
     width: 600px;
     height: 500px;
-}
+border-radius: 10px 0 0px 10px;}
 
 .controls {
 	width: 100%;
@@ -84,7 +86,7 @@ ul li {
 
 #thickness-section {
   margin: 0;
-  /* margin-top: 1px; */
+  font-size: 25px;/* margin-top: 1px; */
 }
 
 button {
@@ -262,5 +264,432 @@ button {
         height: 500px;
     }
   } 
+
+
+
+  
+html{
+    background: #fad390;
+}
+
+body{
+    justify-content: center;
+    align-items: center;
+}
+
+.containerBackground{
+    width: 100%;
+    height: 55%;
+    position:absolute;
+    margin: auto;
+    left: 0;
+    top: 150px;
+    bottom: 0;
+    transform: rotate(10deg);
+    animation: floaty 4s infinite;
+}
+
+.lint{
+    width: 370px;
+    height: 135px;
+    position: absolute;
+    background-color: #f7f1e3;
+    border-radius: 250px 250px 250px 250px;
+    top:90px;
+    left:60px;
+}
+
+.lintRight{
+    width: 370px;
+    height: 135px;
+    position: absolute;
+    background-color: #f7f1e3;
+    border-radius: 250px 250px 250px 250px;
+    top:90px;
+    right:60px;
+}
+
+.cat{
+    background-color: transparent;
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    top: -170px;
+    left: -20px;
+}
+
+.catRight{
+    background-color: transparent;
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    top: -170px;
+    right: -20px;
+}
+
+.head{
+    width: 240px;
+    height: 180px;
+    background-color: #D7B587;
+    position: absolute;
+    border-top-left-radius: 100px 100px;
+    border-top-right-radius: 100px 100px;
+    border-bottom-left-radius: 100px 50px;
+    border-bottom-right-radius: 100px 50px;
+    top: 10px;
+    left:80px;
+}
+
+.rightLeg{
+    width: 70px;
+    height: 130px;
+    background-color: #D7B587;
+    position: absolute;
+    top: 150px;
+    left:220px;
+    border-radius: 250px 250px 250px 250px;
+}
+
+.rightBall{
+    width: 70px;
+    height: 50px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 240px;
+    left:220px;
+    border-radius: 0px 0px 250px 250px;
+    display: block;
+}
+
+.leftLeg{
+    width: 70px;
+    height: 130px;
+    background-color: #D7B587;
+    position: absolute;
+    top: 150px;
+    left:120px;
+    border-radius: 250px 250px 250px 250px;
+}
+
+.leftBall{
+    width: 70px;
+    height: 50px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 240px;
+    left:120px;
+    border-radius: 0px 0px 250px 250px;
+    display: block;
+}
+
+.earRight{
+    top:9px;
+    right: 50px;
+    width: 70px;
+    height: 60px;
+    background-color: #D7B587;
+    border: 5px solid;
+    border-color: #D7B587;
+    position: absolute;
+    border-radius: 20px;
+    border-bottom-left-radius: 80px;
+    transform: rotate(-130deg);
+    z-index: 0;
+    animation: move 4s infinite;
+
+}
+
+.pinkDetailR{
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background-color: #da9d81;
+    border-radius: 20px;
+    border-bottom-left-radius: 80px;
+    position: absolute;
+    
+}
+
+.earLeft{
+    top:9px;
+    left: 50px;
+    width: 70px;
+    height: 60px;
+    background-color: #D7B587;
+    border: 5px solid;
+    border-color: #D7B587;
+    position: absolute;
+    border-radius: 20px;
+    border-bottom-left-radius: 80px;
+    transform: rotate(40deg);
+    z-index: 0;
+    animation: 4s move2 infinite;
+
+}
+
+.pinkDetailL{
+    top: 6px;
+    right: -30px;
+    left: 12px;
+    width: 50px;
+    height: 50px;
+    background-color: #da9d81;
+    border-radius: 20px;
+    border-bottom-left-radius: 80px;
+    position: absolute; 
+}
+
+.eyeRight{
+    top: 70px;
+    right: 45px;
+    width: 35px;
+    height: 35px;
+    background-color: #000000;
+    position: absolute;
+    border-radius: 50px 50px 50px 50px;
+    animation: blink 6s infinite;
+}
+
+.eyeLeft{
+    top: 70px;
+    left: 45px;;
+    width: 35px;
+    height: 35px;
+    background-color: #000000;
+    position: absolute;
+    border-radius: 50px 50px 50px 50px;
+    animation: blink 6s infinite;
+}
+
+.whiteBall{
+    top: 120px;
+    left: 20px;;
+    width: 200px;
+    height: 50px;
+    background-color: #ffffff;
+    position: absolute;
+    border-top-left-radius: 100px 100px;
+    border-top-right-radius: 100px 100px;
+    border-bottom-left-radius: 100px 50px;
+    border-bottom-right-radius: 100px 50px;
+    transform: rotate(180deg);
+    
+}
+
+.whiteBallUp{
+    position: absolute;
+    top:80px;
+    width: 10px;
+    height: 10px;
+    left:60px;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom:55px solid #ffffff;
+    border-left:55px solid transparent;
+    border-right:55px solid transparent;
+}
+
+.nose{
+    width: 25px;
+    height: 20px;
+    background-color: #da9d81;
+    position: absolute;
+    border-top-left-radius: 100px 100px;
+    border-top-right-radius: 100px 100px;
+    border-bottom-left-radius: 100px 50px;
+    border-bottom-right-radius: 100px 50px;
+    top: 80px;
+    left:107px;
+    transform: rotate(180deg);
+
+}
+
+.mouthLeft{
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background-color: #da9d81;
+    left:115px;
+    top: 115px;
+    transform: rotate(31deg);
+
+}
+
+.mouthRight{
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background-color: #da9d81;
+    left:122px;
+    top: 115px;
+    transform: rotate(-31deg);
+    
+}
+
+.stripe1Top{
+    left: 105px;
+    width: 11px;
+    height: 50px;
+    position: absolute;
+    background-color: #b89360;
+    border-radius: 100%;
+    transform: rotate(-5deg);
+}
+
+.stripe2Top{
+    left: 125px;
+    width: 11px;
+    height: 50px;
+    position: absolute;
+    background-color: #b89360;
+    border-radius: 100%;
+    transform: rotate(5deg);
+}
+
+.stripe3Top{
+    top:5px;
+    left: 70px;
+    width: 12px;
+    height: 55px;
+    position: absolute;
+    background-color: #b89360;
+    border-radius: 100%;
+}
+
+.stripe4Top{
+    top:5px;
+    left: 155px;
+    width: 12px;
+    height: 55px;
+    position: absolute;
+    background-color: #b89360;
+    border-radius: 100%;
+}
+
+.stripe1Left{
+    top:60px;
+    left: 10px;
+    width: 12px;
+    height: 35px;
+    position: absolute;
+    background-color: #b89360;
+    border-radius: 100%;
+    transform: rotate(90deg);
+}
+
+.stripe2Left{
+    top:80px;
+    left: 10px;
+    width: 12px;
+    height: 35px;
+    position: absolute;
+    background-color: #b89360;
+    border-radius: 100%;
+    transform: rotate(90deg);
+}
+
+.stripe1Right{
+    top:60px;
+    left: 215px;
+    width: 12px;
+    height: 35px;
+    position: absolute;
+    background-color: #b89360;
+    border-radius: 100%;
+    transform: rotate(90deg);
+}
+
+.stripe2Right{
+    top:80px;
+    left: 215px;
+    width: 12px;
+    height: 35px;
+    position: absolute;
+    background-color: #b89360;
+    border-radius: 100%;
+    transform: rotate(90deg);
+}
+
+@keyframes floaty{
+    0%, 100% {
+        transform: translateY(-0deg);
+        transform: rotate(-10deg);
+    }
+    50%{
+        transform: translateY(50px);
+    }
+}
+
+@keyframes move {
+    0% {
+      transform: rotate(-120deg);
+    }
+    30% {
+      transform: rotate(-140deg);
+    }
+    50% {
+      transform: rotate(-130deg);
+    }
+    100% {
+      transform: rotate(-120deg);
+    }   
+}
+
+@keyframes move2 {
+    0% {
+      transform: rotate(30deg);
+    }
+    30% {
+      transform: rotate(45deg);
+    }
+    50% {
+      transform: rotate(40deg);
+    }
+    100% {
+      transform: rotate(30deg);
+    }   
+}
+
+
+@keyframes blink {
+    20%{
+        transform: scaleY(0.6);
+    }
+    30%{
+        transform: scaleY(0.3);
+    }
+    47%{
+        transform: scaleY(0.8)
+    }
+    50%{
+        transform: scaleY(0)
+    }
+    55%{
+        transform: scaleY(0.8)
+    }
+    60%{
+        transform: scaleY(0)
+    }
+    65%{
+        transform: scaleY(0.8)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
