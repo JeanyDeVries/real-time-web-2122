@@ -1,24 +1,25 @@
-*{
+* {
     color: white;
     margin: 0 auto;
     font-size: 1em;
     font-family: 'Baloo 2', cursive;
+    padding: 0;
 }
 
 html,
 body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #d3d3d3;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #d3d3d3;
 }
 
 #particle-canvas {
     width: 100%;
     height: 100%;
-  }
+}
 
 main {
     display: flex;
@@ -40,93 +41,111 @@ h1 {
     background: #da9d81;
     top: 50%;
     transform: translate(0%, -50%);
-    border-radius: 10px;/* box-shadow: 0px 0px 3px 1px white; */
+    border-radius: 10px;
+    /* box-shadow: 0px 0px 3px 1px white; */
 }
 
-
-
-.drawingCanvas {
-	color: #fff;
-    cursor: crosshair;
+.containerCanvas {
     width: 600px;
     height: 500px;
-border-radius: 10px 0 0px 10px;}
+}
+
+.containerChat {
+    width: 300px;
+    height: 500px;
+    position: inherit;
+    right: -0px;
+
+}
+
+.chat {}
+
+.drawingCanvas {
+    color: #fff;
+    cursor: crosshair;
+    border-radius: 10px 0 0px 10px;
+}
 
 .controls {
-	width: 100%;
-	display: flex;
-/* margin-top: -50px; *//* background-color: white; *//* opacity: 0.4; */}
-
-ul {
-	list-style:none;
-	margin: 0;
-	padding: 5px 0 20px;
-	width: 380px;
+    width: 100%;
+    display: flex;
 }
 
-ul li {
-	display:block;
-	height: 30px;
-	width: 30px;
-	border-radius: 5px;
-	cursor: pointer;
-	border: 0;
+.controlsList {
+    list-style: none;
+    margin: 0;
+    padding: 5px 0 20px;
+    width: 361px;
 }
 
-ul li {
-	display: inline-block;
-	margin: 0 1px 5px;
+.controlsList li {
+    display: block;
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 0;
+}
+
+.controlsList li {
+    display: inline-block;
+    margin: 0 1px 5px;
 
 }
 
 .selected {
-	width: 30px;
-	height: 30px;
+    width: 30px;
+    height: 30px;
 }
 
 #thickness-section {
-  margin: 0;
-  font-size: 25px;/* margin-top: 1px; */
+    margin: 0;
+    font-size: 25px;
+    width: 200px;
+    /* margin-top: 1px; */
 }
 
 button {
-	background: #fff;
-	box-shadow: 0 4px 5px 0 #222;
-	color: #000;
-	outline: none;
-	cursor: pointer;
-	display: block;
-	font-size: 16px;
-	line-height: 40px;
+    background: #fff;
+    box-shadow: 0 4px 5px 0 #222;
+    color: #000;
+    outline: none;
+    cursor: pointer;
+    display: block;
+    font-size: 16px;
+    line-height: 40px;
 }
 
 
 .sliders p {
-	margin: 8px 0;
-	vertical-align: middle;
-}
-.sliders label {
-	display: inline-block;
-	margin: 0 10px 0 0;
-	width: 35px;
-	font-size: 14px;
-	color: #6D574E;
-}
-.sliders input {
-	position: relative;
-	top: 2px;
+    margin: 8px 0;
+    vertical-align: middle;
 }
 
 .sliders label {
-	display: inline-block;
-	margin: 0 10px 0 0;
-	width: 35px;
-	font-size: 14px;
-	color: #6D574E;
+    display: inline-block;
+    margin: 0 10px 0 0;
+    width: 35px;
+    font-size: 14px;
+    color: #6D574E;
 }
+
 .sliders input {
-	position: relative;
-	top: 2px;
+    position: relative;
+    top: 2px;
+}
+
+.sliders label {
+    display: inline-block;
+    margin: 0 10px 0 0;
+    width: 35px;
+    font-size: 14px;
+    color: #6D574E;
+}
+
+.sliders input {
+    position: relative;
+    top: 2px;
 }
 
 .slider {
@@ -134,18 +153,20 @@ button {
     width: 100%;
     height: 10px;
     border-radius: 5px;
-    background: rgb(70 70 70);;
+    background: rgb(70 70 70);
+    ;
     outline: none;
     opacity: 0.8;
     -webkit-transition: .2s;
     transition: opacity .2s;
-  margin-top: 16px;}
-  
-  .slider:hover {
+    margin-top: 16px;
+}
+
+.slider:hover {
     opacity: 1;
-  }
-  
-  .slider::-webkit-slider-thumb {
+}
+
+.slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 20px;
@@ -153,17 +174,32 @@ button {
     border-radius: 50%;
     background: white;
     cursor: pointer;
-  }
-  
-  .slider::-moz-range-thumb {
+}
+
+.slider::-moz-range-thumb {
     width: 25px;
     height: 25px;
     border-radius: 50%;
     background: white;
     cursor: pointer;
-  }
+}
 
+input {
+    color: red;
+}
 
+form>button {
+    padding: 0 0.6rem 0 0.4rem;
+    width: 2rem;
+    background: rgb(239, 238, 238);
+    box-shadow: inset -0.2rem 0.2rem 0.3rem 0 rgba(209, 205, 199, 0.5);
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    border: 0;
+    opacity: 80%;
+    outline: none;
+    transition: 0.2s;
+}
 
 
 
@@ -173,82 +209,82 @@ button {
 /* COLORS */
 
 .white {
-	background: #ffffff;
+    background: #ffffff;
 }
 
 .grey {
-	background: #7c7c7c;
+    background: #7c7c7c;
 }
 
 .darkgrey {
-	background: #3f3f3f;
+    background: #3f3f3f;
 }
 
 .black {
-	background: #000000;
+    background: #000000;
 }
 
 .lightBlue {
-	background: #b9cadd;
+    background: #b9cadd;
 }
 
 .blue {
-	background: #7eb7f8;
+    background: #7eb7f8;
 }
 
 .lightPink {
-	background: #ff9ce1;
+    background: #ff9ce1;
 }
 
 .pink {
-	background: #fd5ccd;
+    background: #fd5ccd;
 }
 
-.lightPurple{
+.lightPurple {
     background: #e3aafa;
 }
 
-.purple{
+.purple {
     background: #b141fc;
 }
 
-.lightGreen{
+.lightGreen {
     background: #c6fda6;
 }
 
-.green{
+.green {
     background: #95fc59;
 }
 
-.lightYellow{
+.lightYellow {
     background: #fdfca6;
 }
 
-.yellow{
+.yellow {
     background: #f1ef5d;
 }
 
-.lightOrange{
+.lightOrange {
     background: #fad295;
 }
 
-.orange{
+.orange {
     background: #f0a638;
 }
 
-.lightRed{
+.lightRed {
     background: #fa9595;
 }
 
-.red{
+.red {
     background: #f34343;
 }
 
-.lightBrown{
+.lightBrown {
     background: #79615e;
 }
 
-.brown{
+.brown {
     background: #4e3a37;
 }
 
@@ -259,28 +295,28 @@ button {
         height: 500px;
     }
 
-    .drawingCanvas{
+    .drawingCanvas {
         width: 700px;
         height: 500px;
     }
-  } 
+}
 
 
 
-  
-html{
+
+html {
     background: #fad390;
 }
 
-body{
+body {
     justify-content: center;
     align-items: center;
 }
 
-.containerBackground{
+.containerBackground {
     width: 100%;
     height: 55%;
-    position:absolute;
+    position: absolute;
     margin: auto;
     left: 0;
     top: 150px;
@@ -289,27 +325,27 @@ body{
     animation: floaty 4s infinite;
 }
 
-.lint{
+.lint {
     width: 370px;
     height: 135px;
     position: absolute;
     background-color: #f7f1e3;
     border-radius: 250px 250px 250px 250px;
-    top:90px;
-    left:60px;
+    top: 90px;
+    left: 60px;
 }
 
-.lintRight{
+.lintRight {
     width: 370px;
     height: 135px;
     position: absolute;
     background-color: #f7f1e3;
     border-radius: 250px 250px 250px 250px;
-    top:90px;
-    right:60px;
+    top: 90px;
+    right: 60px;
 }
 
-.cat{
+.cat {
     background-color: transparent;
     position: absolute;
     width: 400px;
@@ -318,7 +354,7 @@ body{
     left: -20px;
 }
 
-.catRight{
+.catRight {
     background-color: transparent;
     position: absolute;
     width: 400px;
@@ -327,7 +363,7 @@ body{
     right: -20px;
 }
 
-.head{
+.head {
     width: 240px;
     height: 180px;
     background-color: #D7B587;
@@ -337,53 +373,53 @@ body{
     border-bottom-left-radius: 100px 50px;
     border-bottom-right-radius: 100px 50px;
     top: 10px;
-    left:80px;
+    left: 80px;
 }
 
-.rightLeg{
+.rightLeg {
     width: 70px;
     height: 130px;
     background-color: #D7B587;
     position: absolute;
     top: 150px;
-    left:220px;
+    left: 220px;
     border-radius: 250px 250px 250px 250px;
 }
 
-.rightBall{
+.rightBall {
     width: 70px;
     height: 50px;
     background-color: #ffffff;
     position: absolute;
     top: 240px;
-    left:220px;
+    left: 220px;
     border-radius: 0px 0px 250px 250px;
     display: block;
 }
 
-.leftLeg{
+.leftLeg {
     width: 70px;
     height: 130px;
     background-color: #D7B587;
     position: absolute;
     top: 150px;
-    left:120px;
+    left: 120px;
     border-radius: 250px 250px 250px 250px;
 }
 
-.leftBall{
+.leftBall {
     width: 70px;
     height: 50px;
     background-color: #ffffff;
     position: absolute;
     top: 240px;
-    left:120px;
+    left: 120px;
     border-radius: 0px 0px 250px 250px;
     display: block;
 }
 
-.earRight{
-    top:9px;
+.earRight {
+    top: 9px;
     right: 50px;
     width: 70px;
     height: 60px;
@@ -399,7 +435,7 @@ body{
 
 }
 
-.pinkDetailR{
+.pinkDetailR {
     right: 10px;
     width: 50px;
     height: 50px;
@@ -407,11 +443,11 @@ body{
     border-radius: 20px;
     border-bottom-left-radius: 80px;
     position: absolute;
-    
+
 }
 
-.earLeft{
-    top:9px;
+.earLeft {
+    top: 9px;
     left: 50px;
     width: 70px;
     height: 60px;
@@ -427,7 +463,7 @@ body{
 
 }
 
-.pinkDetailL{
+.pinkDetailL {
     top: 6px;
     right: -30px;
     left: 12px;
@@ -436,10 +472,10 @@ body{
     background-color: #da9d81;
     border-radius: 20px;
     border-bottom-left-radius: 80px;
-    position: absolute; 
+    position: absolute;
 }
 
-.eyeRight{
+.eyeRight {
     top: 70px;
     right: 45px;
     width: 35px;
@@ -450,9 +486,10 @@ body{
     animation: blink 6s infinite;
 }
 
-.eyeLeft{
+.eyeLeft {
     top: 70px;
-    left: 45px;;
+    left: 45px;
+    ;
     width: 35px;
     height: 35px;
     background-color: #000000;
@@ -461,9 +498,10 @@ body{
     animation: blink 6s infinite;
 }
 
-.whiteBall{
+.whiteBall {
     top: 120px;
-    left: 20px;;
+    left: 20px;
+    ;
     width: 200px;
     height: 50px;
     background-color: #ffffff;
@@ -473,23 +511,23 @@ body{
     border-bottom-left-radius: 100px 50px;
     border-bottom-right-radius: 100px 50px;
     transform: rotate(180deg);
-    
+
 }
 
-.whiteBallUp{
+.whiteBallUp {
     position: absolute;
-    top:80px;
+    top: 80px;
     width: 10px;
     height: 10px;
-    left:60px;
+    left: 60px;
     border-top-left-radius: 100px;
     border-top-right-radius: 100px;
-    border-bottom:55px solid #ffffff;
-    border-left:55px solid transparent;
-    border-right:55px solid transparent;
+    border-bottom: 55px solid #ffffff;
+    border-left: 55px solid transparent;
+    border-right: 55px solid transparent;
 }
 
-.nose{
+.nose {
     width: 25px;
     height: 20px;
     background-color: #da9d81;
@@ -499,34 +537,34 @@ body{
     border-bottom-left-radius: 100px 50px;
     border-bottom-right-radius: 100px 50px;
     top: 80px;
-    left:107px;
+    left: 107px;
     transform: rotate(180deg);
 
 }
 
-.mouthLeft{
+.mouthLeft {
     position: absolute;
     width: 2px;
     height: 15px;
     background-color: #da9d81;
-    left:115px;
+    left: 115px;
     top: 115px;
     transform: rotate(31deg);
 
 }
 
-.mouthRight{
+.mouthRight {
     position: absolute;
     width: 2px;
     height: 15px;
     background-color: #da9d81;
-    left:122px;
+    left: 122px;
     top: 115px;
     transform: rotate(-31deg);
-    
+
 }
 
-.stripe1Top{
+.stripe1Top {
     left: 105px;
     width: 11px;
     height: 50px;
@@ -536,7 +574,7 @@ body{
     transform: rotate(-5deg);
 }
 
-.stripe2Top{
+.stripe2Top {
     left: 125px;
     width: 11px;
     height: 50px;
@@ -546,8 +584,8 @@ body{
     transform: rotate(5deg);
 }
 
-.stripe3Top{
-    top:5px;
+.stripe3Top {
+    top: 5px;
     left: 70px;
     width: 12px;
     height: 55px;
@@ -556,8 +594,8 @@ body{
     border-radius: 100%;
 }
 
-.stripe4Top{
-    top:5px;
+.stripe4Top {
+    top: 5px;
     left: 155px;
     width: 12px;
     height: 55px;
@@ -566,8 +604,8 @@ body{
     border-radius: 100%;
 }
 
-.stripe1Left{
-    top:60px;
+.stripe1Left {
+    top: 60px;
     left: 10px;
     width: 12px;
     height: 35px;
@@ -577,8 +615,8 @@ body{
     transform: rotate(90deg);
 }
 
-.stripe2Left{
-    top:80px;
+.stripe2Left {
+    top: 80px;
     left: 10px;
     width: 12px;
     height: 35px;
@@ -588,8 +626,8 @@ body{
     transform: rotate(90deg);
 }
 
-.stripe1Right{
-    top:60px;
+.stripe1Right {
+    top: 60px;
     left: 215px;
     width: 12px;
     height: 35px;
@@ -599,8 +637,8 @@ body{
     transform: rotate(90deg);
 }
 
-.stripe2Right{
-    top:80px;
+.stripe2Right {
+    top: 80px;
     left: 215px;
     width: 12px;
     height: 35px;
@@ -610,86 +648,82 @@ body{
     transform: rotate(90deg);
 }
 
-@keyframes floaty{
-    0%, 100% {
+@keyframes floaty {
+
+    0%,
+    100% {
         transform: translateY(-0deg);
         transform: rotate(-10deg);
     }
-    50%{
+
+    50% {
         transform: translateY(50px);
     }
 }
 
 @keyframes move {
     0% {
-      transform: rotate(-120deg);
+        transform: rotate(-120deg);
     }
+
     30% {
-      transform: rotate(-140deg);
+        transform: rotate(-140deg);
     }
+
     50% {
-      transform: rotate(-130deg);
+        transform: rotate(-130deg);
     }
+
     100% {
-      transform: rotate(-120deg);
-    }   
+        transform: rotate(-120deg);
+    }
 }
 
 @keyframes move2 {
     0% {
-      transform: rotate(30deg);
+        transform: rotate(30deg);
     }
+
     30% {
-      transform: rotate(45deg);
+        transform: rotate(45deg);
     }
+
     50% {
-      transform: rotate(40deg);
+        transform: rotate(40deg);
     }
+
     100% {
-      transform: rotate(30deg);
-    }   
+        transform: rotate(30deg);
+    }
 }
 
 
 @keyframes blink {
-    20%{
+    20% {
         transform: scaleY(0.6);
     }
-    30%{
+
+    30% {
         transform: scaleY(0.3);
     }
-    47%{
+
+    47% {
         transform: scaleY(0.8)
     }
-    50%{
+
+    50% {
         transform: scaleY(0)
     }
-    55%{
+
+    55% {
         transform: scaleY(0.8)
     }
-    60%{
+
+    60% {
         transform: scaleY(0)
     }
-    65%{
+
+    65% {
         transform: scaleY(0.8)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

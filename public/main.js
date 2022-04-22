@@ -1,13 +1,13 @@
 let socket = io()
-let messages = document.querySelector('.chatroom ul')
-//let input = document.querySelector('input')
+let messages = document.getElementById('chatMessages')
+let input = document.querySelector('input')
 
 document.querySelector('form').addEventListener('submit', event => {
   event.preventDefault()
- // if (input.value) {
-  //  socket.emit('message', input.value)
-  //  input.value = ''
-  //}
+  if (input.value) {
+    socket.emit('message', input.value)
+    input.value = ''
+  }
 })
 
 socket.on('message', message => {
@@ -15,12 +15,4 @@ socket.on('message', message => {
     textContent: message
   }))
   messages.scrollTop = messages.scrollHeight
-})
-
-document.querySelector('.plsChat').addEventListener('click', () => {
-  document.querySelector('.chatroom').style.setProperty('display', 'block')
-})
-
-document.querySelector('.chatroom button').addEventListener('click', () => {
-  document.querySelector('.chatroom').style.setProperty('display', 'none')
 })

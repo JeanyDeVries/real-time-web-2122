@@ -123,9 +123,16 @@
     </section>
 
     <div class="container">
-      <canvas class = "drawingCanvas"	width="600" height="500" style = "background-color: white;"></canvas>
+      <canvas class = "drawingCanvas containerCanvas"	width="600" height="500" style = "background-color: white;"></canvas>
+      <section class = "containerChat">
+        <ul class = "chat" id = "chatMessages"></ul>
+          <form>
+              <input type="text" autocomplete="off">
+              <button><span>Send</span></button>
+          </form>
+      </section>
       <div class="controls">
-        <ul>
+        <ul class = "controlsList">
           <li class="white"></li>
           <li class="darkgrey"></li>
           <li class="lightBlue "></li>
