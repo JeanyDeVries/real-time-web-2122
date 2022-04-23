@@ -11,8 +11,6 @@ document.querySelector('form').addEventListener('submit', event => {
 })
 
 socket.on('message', message => {
-  messages.appendChild(Object.assign(document.createElement('li'), {
-    textContent: message
-  }))
+  messages.appendChild(Object.assign(document.createElement('li'), { textContent: message }))
   messages.scrollTop = messages.scrollHeight
 })

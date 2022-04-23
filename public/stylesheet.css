@@ -4,6 +4,7 @@
     font-size: 1em;
     font-family: 'Baloo 2', cursive;
     padding: 0;
+    bottom: 0;
 }
 
 html,
@@ -52,13 +53,33 @@ h1 {
 
 .containerChat {
     width: 300px;
-    height: 500px;
+    /* height: 500px; */
     position: inherit;
     right: -0px;
 
+    display: inline-grid;
+    /* overflow: scroll; */
 }
 
-.chat {}
+.chat {
+    width: 90%;
+    height: 425px;
+    position: relative;
+    list-style: none;
+    /* margin-left: 10px; */
+    /* left: 0; */
+    overflow-y: scroll;
+}
+
+.chat li {
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    margin: 0;
+    margin-top: 10px;
+    width: fit-content;
+    padding: 5px;
+}
 
 .drawingCanvas {
     color: #fff;
@@ -188,6 +209,26 @@ input {
     color: red;
 }
 
+form {
+    display: flex;
+    align-self: center;
+    width: 90%;
+    gap: 0px;
+    height: 30px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    /* border-radius: 49px; */
+}
+
+form>input {
+    color: black;
+    border-radius: 5px;
+    outline: 1px solid black;
+    box-shadow: none;
+    width: 220px;
+    margin: 0;
+}
+
 form>button {
     padding: 0 0.6rem 0 0.4rem;
     width: 2rem;
@@ -199,6 +240,9 @@ form>button {
     opacity: 80%;
     outline: none;
     transition: 0.2s;
+    /* margin: 0; */
+    /* left: 0px; */
+    /* border-radius: 13px; */
 }
 
 
