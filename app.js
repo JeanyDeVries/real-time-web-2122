@@ -5,7 +5,15 @@ const path = require('path')
 const io = require('socket.io')(server)
 const port = process.env.PORT || 4242
 
-app.use(express.static(path.resolve('public')))
+app.use(express.static(path.join(__dirname, 'public')))
+
+app.get("/", (req, res)=>{
+  res.sendFile(path.join(__dirname, 'views/index.html'))
+})
+
+app.get("/chat", (req, res)=>{
+  res.sendFile(path.join(__dirname, 'views/chat.html'))
+})
 
 
 io.on('connection', (socket) => {
