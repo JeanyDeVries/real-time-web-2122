@@ -609,23 +609,23 @@ body {
 }
 
 .stripe1Top {
-    left: 105px;
+    right: 105px;
     width: 11px;
     height: 50px;
-    position: absolute;
+    /* position: absolute; */
     background-color: #b89360;
     border-radius: 100%;
     transform: rotate(-5deg);
-}
+/* margin: 0px; */}
 
 .stripe2Top {
-    left: 125px;
-    width: 11px;
-    height: 50px;
-    position: absolute;
-    background-color: #b89360;
-    border-radius: 100%;
-    transform: rotate(5deg);
+    /* left: 202px; */
+    /* width: 10px; */
+    /* height: 50px; */
+    /* position: unset; */
+    /* background-color: #b89360; */
+    /* border-radius: 100%; */
+    /* transform: rotate(5deg); */
 }
 
 .stripe3Top {

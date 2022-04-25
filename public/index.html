@@ -1,173 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAWR.io</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Roboto+Serif:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="stylesheet.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAWR.io</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Roboto+Serif:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
-
 <body>
-
-  <div class="containerBackground">
-
-    <!--Cat-->
-    <div class="lint">
-        <div  class="cat">
-
-            <!--Ears-->
-            <div class="earRight">
-                <div class="pinkDetailR"></div>
-            </div>
-            <div class="earLeft">
-                <div class="pinkDetailL"></div>
-            </div>
-
-            <!--Paws-->
-            <div class="body">
-                <div class="rightLeg"> </div>
-                <div class="leftLeg"></div>
-            </div>
-            <div class="rightBall"></div>
-            <div class="leftBall"></div>
-
-            <!--Face Head-->
-            <div class="head">
-                
-                <!--Eyes-->
-                <div class="whiteBall Right">                         </div>
-                <div class="whiteBall Left">                         </div>
-                <div class="eyeRight"></div>
-                <div class="eyeLeft"></div>
-
-                <!--Nose and Mouth-->
-                <div class="whiteBall"></div>
-                <div class="whiteBallUp"></div>
-                <div class="mouthLeft"></div>
-                <div class="mouthRight"></div>
-                <div class="nose"></div>
-                <div class="stripe1Top"></div>
-                <div class="stripe2Top"></div>
-                <div class="stripe3Top"></div>
-                <div class="stripe4Top"></div>
-                <div class="stripe1Left"></div>
-                <div class="stripe2Left"></div>
-                <div class="stripe1Right"></div>
-                <div class="stripe2Right"></div>
-        
-            </div>
-
-        </div>
-
-    </div>
-
-        <div class="lintRight">
-        <div  class="cat">
-
-            <!--Ears-->
-            <div class="earRight">
-                <div class="pinkDetailR"></div>
-            </div>
-            <div class="earLeft">
-                <div class="pinkDetailL"></div>
-            </div>
-
-            <!--Paws-->
-            <div class="body">
-                <div class="rightLeg"> </div>
-                <div class="leftLeg"></div>
-            </div>
-            <div class="rightBall"></div>
-            <div class="leftBall"></div>
-
-            <!--Face Head-->
-            <div class="head">
-                
-                <!--Eyes-->
-                <div class="whiteBall Right">                         </div>
-                <div class="whiteBall Left">                         </div>
-                <div class="eyeRight"></div>
-                <div class="eyeLeft"></div>
-
-                <!--Nose and Mouth-->
-                <div class="whiteBall"></div>
-                <div class="whiteBallUp"></div>
-                <div class="mouthLeft"></div>
-                <div class="mouthRight"></div>
-                <div class="nose"></div>
-                <div class="stripe1Top"></div>
-                <div class="stripe2Top"></div>
-                <div class="stripe3Top"></div>
-                <div class="stripe4Top"></div>
-                <div class="stripe1Left"></div>
-                <div class="stripe2Left"></div>
-                <div class="stripe1Right"></div>
-                <div class="stripe2Right"></div>
-        
-            </div>
-
-        </div>
-
-    </div>
-    
-</div>
-
-  <main>
-    <section>
-      <h1>RAWR.io</h1>
-    </section>
-
-    <div class="container">
-      <canvas class = "drawingCanvas containerCanvas"	width="600" height="500" style = "background-color: white;"></canvas>
-      <section class = "containerChat">
-        <ul class = "chat" id = "chatMessages"></ul>
-          <form>
-              <input type="text" autocomplete="off">
-              <button></button>
-          </form>
-      </section>
-      <div class="controls">
-        <ul class = "controlsList">
-          <li class="white"></li>
-          <li class="darkgrey"></li>
-          <li class="lightBlue "></li>
-          <li class="lightPink"></li>
-          <li class="lightPurple"></li>
-          <li class="lightGreen"></li>
-          <li class="lightYellow"></li>
-          <li class="lightOrange"></li>
-          <li class="lightRed"></li>
-          <li class="lightBrown"></li>
-          <li class="grey"></li>
-          <li class="black selected"></li>
-          <li class="blue"></li>
-          <li class="pink"></li>
-          <li class="purple"></li>
-          <li class="green"></li>
-          <li class="yellow"></li>
-          <li class="orange"></li>
-          <li class="red"></li>
-          <li class="brown"></li>
-        </ul>
-        <p id="thickness-section">
-          <label>Brush Thickness</label>
-          <input id="thickness" name="thickness" class = "slider" type="range" min=1 max=100 value=1>
-        </p><br>
-      </div>
-    </div>
-
-  </main>
-
-	<script src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="drawing.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="main.js"></script>
-
+    <form action="/chat.html">
+        <label>Username</label>
+        <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Enter username..."
+            required
+        />        
+        <button type="submit" class="btn">Join Chat</button>
+    </form>
 </body>
-
 </html>
