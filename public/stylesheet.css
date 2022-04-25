@@ -79,10 +79,12 @@ h1 {
     margin-top: 10px;
     width: fit-content;
     padding: 5px;
+    display: flex;
 }
 
-.chat li p{
+.chat li p {
     color: black;
+    margin-right: 5px;
 }
 
 .drawingCanvas {
@@ -620,7 +622,8 @@ body {
     background-color: #b89360;
     border-radius: 100%;
     transform: rotate(-5deg);
-/* margin: 0px; */}
+    /* margin: 0px; */
+}
 
 .stripe2Top {
     /* left: 202px; */
