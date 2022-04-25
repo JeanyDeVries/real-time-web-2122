@@ -364,12 +364,12 @@ body {
 }
 
 .containerBackground {
-    width: 100%;
+    width: 1600px;
     height: 55%;
     position: absolute;
     margin: auto;
-    left: 0;
-    top: 150px;
+    left: 170px;
+    top: 170px;
     bottom: 0;
     transform: rotate(10deg);
     animation: floaty 4s infinite;
@@ -381,7 +381,7 @@ body {
     position: absolute;
     background-color: #f7f1e3;
     border-radius: 250px 250px 250px 250px;
-    top: 90px;
+    top: 160px;
     left: 60px;
 }
 
@@ -701,15 +701,19 @@ body {
 
 @keyframes floaty {
 
-    0%,
+    0%{
+        transform: translateY(50px);
+        transform: rotate(10deg);
+    }
+    50% {
+        transform: translateY(0);
+        transform: rotate(-10deg);    
+    }
     100% {
-        transform: translateY(-0deg);
-        transform: rotate(-10deg);
+        transform: translateY(50px);
+        transform: rotate(10deg);
     }
 
-    50% {
-        transform: translateY(50px);
-    }
 }
 
 @keyframes move {
