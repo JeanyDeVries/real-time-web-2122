@@ -26,17 +26,18 @@ io.on('connection', (socket) => {
 
     //add room functionality (https://www.npm youtube.com/watch?v=jD7FnbI76Hg&ab_channel=TraversyMedia)
 
-    socket.emit('message', formatMessages("BOT", `user has joined the room`))
+    socket.emit('message', formatMessages("BOT", `${user.username.username} has joined the room`))
 
   })
 
   socket.on('chatMessage', message =>{
     const user = getCurrentUser(socket.id);
-    io.emit('message', formatMessages(user.username.username, message))
+    io.emit('message', formatMessages(user.username.username ,message))
   })
 
   socket.on('disconnect', () => {
-    console.log('user disconnected')
+    const user = getCurrentUser(socket.id);
+    io.emit('message', formatMessages("BOT", `${user.username.username} has left the room`))  
   })
 })
 
