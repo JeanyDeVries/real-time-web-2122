@@ -81,6 +81,10 @@ h1 {
     padding: 5px;
 }
 
+.chat li p{
+    color: black;
+}
+
 .drawingCanvas {
     color: #fff;
     cursor: crosshair;
