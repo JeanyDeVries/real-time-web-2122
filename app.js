@@ -35,6 +35,14 @@ io.on('connection', (socket) => {
     io.emit('message', formatMessages(user.username.username ,message))
   })
 
+  socket.on("drawing", (draw) => {
+    io.emit("drawing", draw);
+  });
+
+  socket.on("start", (coord) => {
+    io.emit("start", coord);
+  });
+
   socket.on('disconnect', () => {
     const user = getCurrentUser(socket.id);
     io.emit('message', formatMessages("BOT", `${user.username.username} has left the room`))  
