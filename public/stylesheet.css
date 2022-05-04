@@ -364,14 +364,13 @@ body {
 }
 
 .containerBackground {
-    width: 1600px;
+    width: 100%;
     height: 55%;
     position: absolute;
     margin: auto;
-    left: 170px;
-    top: 170px;
+    left: 0;
+    top: 150px;
     bottom: 0;
-    transform: rotate(10deg);
     animation: floaty 4s infinite;
 }
 
@@ -780,5 +779,74 @@ body {
 
     65% {
         transform: scaleY(0.8)
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .container {
+        width: 800px;
+        height: 500px;
+        top: 60%;
+    }
+
+    .drawingCanvas {
+        width: 700px;
+        height: 500px;
+    }
+    .containerBackground{
+        transform: rotate(0deg);
+        top: 100px;
+    }
+
+}
+
+@media screen and (max-width:1300px){
+        body .containerBackground{
+        position: absolute;
+        top: -90px;
+        animation: floatySmall 4s infinite;
+        transform: rotate(0deg);
+    }
+
+    .lint{
+        top: 100px
+    }
+
+    .lintRight{
+        top: 100px
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .container {
+        width: 1000px;
+        height: 500px;
+        top: 50%;
+    }
+
+    .drawingCanvas {
+        width: 600px;
+        height: 500px;
+    }
+
+    .containerChat{
+        width: 400px;
+    }
+}
+
+@media screen and (min-width: 1800px) {
+    .container {
+        width: 1200px;
+        height: 500px;
+        top: 50%;
+    }
+
+    .drawingCanvas {
+        width: 600px;
+        height: 500px;
+    }
+
+    .containerChat{
+        width: 600px;
     }
 }
