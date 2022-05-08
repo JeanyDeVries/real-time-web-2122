@@ -2,11 +2,15 @@
 
 ## Table of Contents
 - [Description](#description)
+- [Clone repo](#Clone)
 - [Issues](#Issues)
 
 ## Description
 
-
+## Clone repo <a name="Clone">
+```
+  $ git clone https://github.com/JeanyDeVries/real-time-web-2122.git
+```
 
   
 ## Issues <a name="Issues">
