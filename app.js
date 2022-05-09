@@ -49,6 +49,14 @@ io.on('connection', (socket) => {
     io.emit("start", coord);
   });
 
+  socket.on("stop", (coord) => {
+    io.emit("stop", coord);
+  });
+
+  socket.on("move", (coord) => {
+    io.emit("move", coord);
+  });
+
   socket.on('disconnect', () => {
     const user = getCurrentUser(socket.id);
     io.emit('message', formatMessages("BOT", `${user.username.username} has left the room`))  

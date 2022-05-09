@@ -87,24 +87,34 @@ socket.on("start", (coord) => {
 // Stap 2, stop met tekenen
 
 const stopDrawing = (e) => {
+  socket.emit("stop", [e.offsetX, e.offsetY]);
+};
+
+socket.on('stop', (coord)=>{
+  console.log('stop drawing to ' + coord)
   if (!isMouseDown) return;
   isMouseDown = false;
-  drawLine(e);
-};
+  drawLine(coord);
+})
 
 // Stap 3, teken een lijn als de muis beweegt
 
 const onMouseMove = (e) => {
-  if (!isMouseDown) return;
-  drawLine(e);
+  socket.emit("move", [e.offsetX, e.offsetY]);
 };
+
+socket.on('move', (coord)=>{
+  console.log('line has been drawn')
+  if (!isMouseDown) return;
+  drawLine(coord);
+})
 
 //  Start met tekenen
 
 const drawLine = (event) => {
   if (isMouseDown) {
-    const newX = event.offsetX;
-    const newY = event.offsetY;
+    const newX = event[0];
+    const newY = event[1];
     context.beginPath();
     context.moveTo(x, y);
     context.lineTo(newX, newY);
