@@ -38,7 +38,7 @@ io.on('connection', (socket) => {
 
   socket.on('joinRoom', username =>{
     const user = userJoin(socket.id, username);
-    users.push(socket.id);
+    //users.push(socket.id);
 
     socket.join(user.room);
 
@@ -73,7 +73,8 @@ io.on('connection', (socket) => {
     // nieuwe speler aanwijzen (random speler uit array)
     console.log(users);
     if(users.length >= 2){
-      activePlayer = users[Math.floor(Math.random() * users.length)];
+      activePlayer = users[Math.floor(Math.random() * users.length)].id;
+      console.log(activePlayer)
     
       io.emit("activePlayer", activePlayer);
       console.log("De actieve speler is: ", activePlayer);
@@ -110,6 +111,7 @@ const users = [];
 // Join user to chat
 function userJoin(id, username, room) {
   const user = { id, username, room };
+  users.push(user);
 
   return user;
 }
