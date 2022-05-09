@@ -22,6 +22,7 @@ app.get("/", (req, res)=>{
   res.render('index')
 })
 
+var randomAnimal;
 app.get("/chat", (req, res)=>{
 
    getAnimalData().then( randomAnimal => {
@@ -37,6 +38,7 @@ io.on('connection', (socket) => {
 
   socket.on('joinRoom', username =>{
     const user = userJoin(socket.id, username);
+    users.push(socket.id);
 
     socket.join(user.room);
 
@@ -67,8 +69,24 @@ io.on('connection', (socket) => {
     io.emit("move", coord);
   });
 
+  socket.on("newRound", () => {
+    // nieuwe speler aanwijzen (random speler uit array)
+    console.log(users);
+    activePlayer = users[Math.floor(Math.random() * users.length)];
+    io.emit("activePlayer", activePlayer);
+    console.log("De actieve speler is: ", activePlayer);
+
+    // nieuw random woord kiezen
+
+    // woord emitten naar alle gebruikers
+    io.emit("newWord", randomAnimal);
+
+    // Client-side het woord alleen tonen bij de actieve gebruiker.. (magTekenen..)
+  });
+
   socket.on('disconnect', () => {
     const user = getCurrentUser(socket.id);
+    users.splice(users.indexOf(socket.id), 1); // 2nd parameter means remove one item only
     io.emit('message', formatMessages("BOT", `${user.username.username} has left the room`))  
   })
 })
@@ -89,8 +107,6 @@ const users = [];
 // Join user to chat
 function userJoin(id, username, room) {
   const user = { id, username, room };
-
-  users.push(user);
 
   return user;
 }

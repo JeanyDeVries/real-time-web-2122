@@ -7,6 +7,7 @@ const username = Qs.parse(location.search, {
 });
 
 socket.emit('joinRoom', username)
+socket.emit("newRound");
 
 document.querySelector('form').addEventListener('submit', event => {
   event.preventDefault()
@@ -34,11 +35,10 @@ var color = $(".selected").css("background-color");
 var canvas = document.querySelector(".drawingCanvas");
 var context = canvas.getContext("2d");
 var lastEvent;
-
+var mayDraw = false;
 
 let x = 0, y = 0;
 let isMouseDown = false;
-
 
 //When clicking on control list items
 $(".controls").on("click", "li", function () {
@@ -73,6 +73,19 @@ $("#thickness").on("input", function () {
 //round brush strokes
 context.lineCap = "round";
 
+socket.on("activePlayer", (playerId) => {
+  if (socket.id == playerId) {
+    mayDraw = true;
+    canvas.addEventListener("mousedown", startDrawing, false);
+    canvas.addEventListener("mousemove", throttle(onMouseMove, 0.1), false);
+    canvas.addEventListener("mouseup", stopDrawing, false);
+    canvas.addEventListener("mouseout", stopDrawing, false);
+    console.log("Jij bent de actieve speler");
+  } else {
+    mayDraw = false;
+  }
+});
+
 // Stap 1, begin met tekenen
 const startDrawing = (event) => {
   socket.emit("start", [event.offsetX, event.offsetY]);
@@ -85,7 +98,7 @@ socket.on("start", (coord) => {
 
 // Stap 2, stop met tekenen
 
-const stopDrawing = (e) => {
+const stopDrawing = (e) => {  
   socket.emit("stop", [e.offsetX, e.offsetY]);
 };
 
@@ -102,7 +115,6 @@ const onMouseMove = (e) => {
 };
 
 socket.on('move', (coord)=>{
-  console.log('line has been drawn')
   if (!isMouseDown) return;
   drawLine(coord);
 })
@@ -110,18 +122,19 @@ socket.on('move', (coord)=>{
 //  Start met tekenen
 
 const drawLine = (event) => {
+
   if (isMouseDown) {
     const newX = event[0];
     const newY = event[1];
-    context.beginPath();
-    context.moveTo(x, y);
-    context.lineTo(newX, newY);
-    context.stroke();
-    context.strokeStyle = color;
-    console.log(color)
-    //[x, y] = [newX, newY];
-    x = newX;
-    y = newY;
+      context.beginPath();
+      context.moveTo(x, y);
+      context.lineTo(newX, newY);
+      context.stroke();
+      context.strokeStyle = color;
+      console.log(color)
+      //[x, y] = [newX, newY];
+      x = newX;
+      y = newY;
 
     socket.emit("drawing", {
       x: newX,
@@ -146,14 +159,7 @@ function throttle(callback, delay) {
   };
 }
 
-canvas.addEventListener("mousedown", startDrawing, false);
-canvas.addEventListener("mousemove", throttle(onMouseMove, 1), false);
-canvas.addEventListener("mouseup", stopDrawing, false);
-canvas.addEventListener("mouseout", stopDrawing, false);
-
 function drawEvent(draw) {
-  // console.log(draw);
-  // context.drawLine()
   const { x, y, color, stroke } = draw;
   context.beginPath();
   context.moveTo(x, y);
