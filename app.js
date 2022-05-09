@@ -72,9 +72,12 @@ io.on('connection', (socket) => {
   socket.on("newRound", () => {
     // nieuwe speler aanwijzen (random speler uit array)
     console.log(users);
-    activePlayer = users[Math.floor(Math.random() * users.length)];
-    io.emit("activePlayer", activePlayer);
-    console.log("De actieve speler is: ", activePlayer);
+    if(users.length >= 2){
+      activePlayer = users[Math.floor(Math.random() * users.length)];
+    
+      io.emit("activePlayer", activePlayer);
+      console.log("De actieve speler is: ", activePlayer);
+    }
 
     // nieuw random woord kiezen
 
