@@ -5,11 +5,10 @@ const path = require('path')
 const io = require('socket.io')(server)
 const port = process.env.PORT || 4242
 
-//import { createClient } from '@supabase/supabase-js'
-
-//const supabaseUrl = 'https://cpytdjbqlpwemxucrspz.supabase.co'
-//const supabaseKey = process.env.SUPABASE_KEY
-//const supabase = createClient(supabaseUrl, supabaseKey)
+const { createClient } =  require('@supabase/supabase-js');
+const supabaseUrl = 'https://cpytdjbqlpwemxucrspz.supabase.co'
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNweXRkamJxbHB3ZW14dWNyc3B6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTE0ODM0ODIsImV4cCI6MTk2NzA1OTQ4Mn0.gURZllOQlDhs50kn0xoE2L29dlyDRvCekpBFVVhUPg4'
+const supabase = createClient(supabaseUrl, SUPABASE_KEY)
 
 app.use(express.static(path.join(__dirname, 'public')))
 
