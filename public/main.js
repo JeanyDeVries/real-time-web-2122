@@ -79,7 +79,6 @@ const startDrawing = (event) => {
 };
 
 socket.on("start", (coord) => {
-  console.log("Start drawing from: ", coord);
   isMouseDown = true;
   [x, y] = coord;
 });
@@ -91,7 +90,6 @@ const stopDrawing = (e) => {
 };
 
 socket.on('stop', (coord)=>{
-  console.log('stop drawing to ' + coord)
   if (!isMouseDown) return;
   isMouseDown = false;
   drawLine(coord);
@@ -120,6 +118,7 @@ const drawLine = (event) => {
     context.lineTo(newX, newY);
     context.stroke();
     context.strokeStyle = color;
+    console.log(color)
     //[x, y] = [newX, newY];
     x = newX;
     y = newY;

@@ -19,8 +19,10 @@ app.get("/", (req, res)=>{
 
 app.get("/chat", (req, res)=>{
 
-   getAnimalData().then( data => {
-    res.sendFile(path.join(__dirname, 'views/chat.html'))
+   getAnimalData().then( animal => {
+    res.sendFile(path.join(__dirname, 'views/chat.html',{
+      animal: animal
+    }))
   });
 })
 
@@ -96,7 +98,10 @@ function getCurrentUser(id) {
 async function getAnimalData(){
   let data = await supabase
     .from('Animals')
-    .select('Name')
+    .select()
 
-  return data;
+  let randomNumber = Math.floor(Math.random() * data.data.length);
+  let animal =data.data[randomNumber].Namedata.data;
+
+  return animal;
 }
