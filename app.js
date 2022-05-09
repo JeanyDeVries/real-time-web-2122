@@ -4,6 +4,7 @@ const server = require('http').createServer(app)
 const path = require('path')
 const io = require('socket.io')(server)
 const port = process.env.PORT || 4242
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
 
 const { createClient } =  require('@supabase/supabase-js');
 const supabaseUrl = 'https://cpytdjbqlpwemxucrspz.supabase.co'
@@ -17,7 +18,10 @@ app.get("/", (req, res)=>{
 })
 
 app.get("/chat", (req, res)=>{
-  res.sendFile(path.join(__dirname, 'views/chat.html'))
+
+   getAnimalData().then( data => {
+    res.sendFile(path.join(__dirname, 'views/chat.html'))
+  });
 })
 
 
@@ -79,4 +83,12 @@ function userJoin(id, username, room) {
 // Get current user
 function getCurrentUser(id) {
   return users.find(user => user.id === id);
+}
+
+async function getAnimalData(){
+  let data = await supabase
+    .from('Animals')
+    .select('Name')
+
+  return data;
 }
