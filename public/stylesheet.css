@@ -251,7 +251,9 @@ form>button {
     /* border-radius: 13px; */
 }
 
-
+.answer{
+    
+position: absolute;top: 0;font-size: 25px;margin-left: 10px;}
 
 
 
