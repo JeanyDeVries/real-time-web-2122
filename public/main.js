@@ -33,6 +33,8 @@ socket.on('message', message => {
 //DRAWING
 var color = $(".selected").css("background-color");
 var canvas = document.querySelector(".drawingCanvas");
+var controls = document.querySelector(".controls");
+var answer = document.querySelector(".answer");
 var context = canvas.getContext("2d");
 var lastEvent;
 var mayDraw = false;
@@ -76,6 +78,9 @@ context.lineCap = "round";
 socket.on("activePlayer", (playerId) => {
   if (socket.id == playerId) {
     mayDraw = true;
+    controls.classList.remove("hidden")
+    answer.classList.remove("hidden")
+
     canvas.addEventListener("mousedown", startDrawing, false);
     canvas.addEventListener("mousemove", throttle(onMouseMove, 0.1), false);
     canvas.addEventListener("mouseup", stopDrawing, false);
@@ -83,6 +88,11 @@ socket.on("activePlayer", (playerId) => {
     console.log("Jij bent de actieve speler");
   } else {
     mayDraw = false;
+    if(controls.classList.contains("hidden"))
+      return; 
+
+    controls.classList.add("hidden")
+    answer.classList.add("hidden")
   }
 });
 
