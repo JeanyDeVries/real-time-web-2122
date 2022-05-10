@@ -90,7 +90,11 @@ socket.on("activePlayer", (playerId) => {
     console.log("Jij bent de actieve speler");
   } else {
     mayDraw = false;
-    //remove listeners
+    canvas.removeEventListener("mousedown", startDrawing, false);
+    canvas.removeEventListener("mousemove", throttle(onMouseMove, 1), false);
+    canvas.removeEventListener("mouseup", stopDrawing, false);
+    canvas.removeEventListener("mouseout", stopDrawing, false);    
+    
     if(controls.classList.contains("hidden"))
       return; 
 

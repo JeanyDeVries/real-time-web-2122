@@ -40,19 +40,20 @@ io.on('connection', (socket) => {
 
   socket.on('joinRoom', username =>{
     const user = userJoin(socket.id, username);
-    //users.push(socket.id);
 
     socket.join(user.room);
 
-    //add room functionality (https://www.npm youtube.com/watch?v=jD7FnbI76Hg&ab_channel=TraversyMedia)
-
-    socket.emit('message', formatMessages("BOT", `${user.username.username} has joined the room`))
+    io.emit('message', formatMessages("BOT", `${user.username.username} has joined the room`))
 
   })
 
   socket.on('chatMessage', message =>{
     const user = getCurrentUser(socket.id);
-    io.emit('message', formatMessages(user.username.username ,message))
+
+    var isCorrect = checkIfMessageCorrect(message, user.username.username);
+
+    if(!isCorrect)
+      io.emit('message', formatMessages(user.username.username , message))
   })
 
   socket.on("drawing", (draw) => {
@@ -72,22 +73,14 @@ io.on('connection', (socket) => {
   });
 
   socket.on("newRound", () => {
-    // nieuwe speler aanwijzen (random speler uit array)
-    console.log(users);
     if(users.length >= 2){
       activePlayer = users[Math.floor(Math.random() * users.length)].id;
-      console.log(activePlayer)
     
       io.emit("activePlayer", activePlayer);
       console.log("De actieve speler is: ", activePlayer);
     }
 
-    // nieuw random woord kiezen
-
-    // woord emitten naar alle gebruikers
     io.emit("newWord", randomAnimal);
-
-    // Client-side het woord alleen tonen bij de actieve gebruiker.. (magTekenen..)
   });
 
   socket.on('disconnect', () => {
@@ -106,6 +99,18 @@ function formatMessages(username, text){
       username,
       text
   }
+}
+
+function checkIfMessageCorrect(message, user){
+  console.log(randomAnimal)
+  if(message === randomAnimal){
+    console.log("correct")
+    console.log("MESSAGE : " + message + "ANSWER : " + randomAnimal)
+    io.emit('message', formatMessages("BOT", `${user} is correct!`))
+    return true;
+  }
+
+  return false;
 }
 
 const users = [];
@@ -133,7 +138,7 @@ async function getAnimalData(){
 
 
   let randomNumber = Math.floor(Math.random() * animals.data.length);
-  let randomAnimal = animals.data[randomNumber].Name;
+  randomAnimal = animals.data[randomNumber].Name;
 
   return randomAnimal;
 }
