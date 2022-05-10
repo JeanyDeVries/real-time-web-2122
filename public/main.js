@@ -79,6 +79,7 @@ context.lineCap = "round";
 
 
 socket.on("activePlayer", (playerId) => {
+  context.clearRect(0, 0, canvas.width, canvas.height);
   if (socket.id == playerId) {
     mayDraw = true;
     controls.classList.remove("hidden")
@@ -103,6 +104,7 @@ socket.on("activePlayer", (playerId) => {
     controls.classList.add("hidden")
     answer.classList.add("hidden")
   }
+
 });
 
 socket.on("answer", (answer) =>{
