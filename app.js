@@ -23,6 +23,8 @@ app.get("/", (req, res)=>{
 })
 
 var randomAnimal;
+var animals; 
+
 app.get("/chat", (req, res)=>{
 
    getAnimalData().then( randomAnimal => {
@@ -122,12 +124,16 @@ function getCurrentUser(id) {
 }
 
 async function getAnimalData(){
-  let data = await supabase
+  if(!animals){
+    let data = await supabase
     .from('Animals')
     .select()
+    animals = data;
+  }
 
-  let randomNumber = Math.floor(Math.random() * data.data.length);
-  let randomAnimal = data.data[randomNumber].Name;
+
+  let randomNumber = Math.floor(Math.random() * animals.data.length);
+  let randomAnimal = animals.data[randomNumber].Name;
 
   return randomAnimal;
 }

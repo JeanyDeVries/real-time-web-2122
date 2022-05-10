@@ -31,13 +31,14 @@ socket.on('message', message => {
 
 
 //DRAWING
-var color = $(".selected").css("background-color");
 var canvas = document.querySelector(".drawingCanvas");
 var controls = document.querySelector(".controls");
 var answer = document.querySelector(".answer");
 var context = canvas.getContext("2d");
 var lastEvent;
 var mayDraw = false;
+var drawingColor;
+var drawingThickness;
 
 let x = 0, y = 0;
 let isMouseDown = false;
@@ -49,7 +50,7 @@ $(".controls").on("click", "li", function () {
   //select clicked element
   $(this).addClass("selected");
   //cache current color here
-  color = $(this).css("background-color");
+  drawingColor = $(this).css("background-color");
 });
 
 //When "new color" is pressed
@@ -70,10 +71,11 @@ $(".color-sliders[type=range]").change(changeColor);
 
 //change thickness
 $("#thickness").on("input", function () {
-  context.lineWidth = $("#thickness").val();
+  drawingThickness = $("#thickness").val();
 });
 //round brush strokes
 context.lineCap = "round";
+
 
 socket.on("activePlayer", (playerId) => {
   if (socket.id == playerId) {
@@ -82,12 +84,13 @@ socket.on("activePlayer", (playerId) => {
     answer.classList.remove("hidden")
 
     canvas.addEventListener("mousedown", startDrawing, false);
-    canvas.addEventListener("mousemove", throttle(onMouseMove, 0.1), false);
+    canvas.addEventListener("mousemove", throttle(onMouseMove, 1), false);
     canvas.addEventListener("mouseup", stopDrawing, false);
     canvas.addEventListener("mouseout", stopDrawing, false);
     console.log("Jij bent de actieve speler");
   } else {
     mayDraw = false;
+    //remove listeners
     if(controls.classList.contains("hidden"))
       return; 
 
@@ -115,42 +118,43 @@ const stopDrawing = (e) => {
 socket.on('stop', (coord)=>{
   if (!isMouseDown) return;
   isMouseDown = false;
-  drawLine(coord);
 })
 
 // Stap 3, teken een lijn als de muis beweegt
 
 const onMouseMove = (e) => {
-  socket.emit("move", [e.offsetX, e.offsetY]);
+  var draw = {coord: [e.offsetX, e.offsetY], drawingColor, drawingThickness}
+
+  socket.emit("move", draw);
 };
 
-socket.on('move', (coord)=>{
+socket.on('move', (draw)=>{
   if (!isMouseDown) return;
-  drawLine(coord);
+  drawLine(draw.coord , draw.drawingColor, draw.drawingThickness);
 })
 
 //  Start met tekenen
 
-const drawLine = (event) => {
+const drawLine = (event, color, thickness) => {
 
   if (isMouseDown) {
     const newX = event[0];
     const newY = event[1];
-      context.beginPath();
-      context.moveTo(x, y);
-      context.lineTo(newX, newY);
-      context.stroke();
-      context.strokeStyle = color;
-      console.log(color)
-      //[x, y] = [newX, newY];
-      x = newX;
-      y = newY;
+
+    context.beginPath();
+    context.moveTo(x, y);
+    context.lineTo(newX, newY);
+    context.lineWidth = thickness;
+    context.stroke();
+    context.strokeStyle = color;
+    x = newX;
+    y = newY;
 
     socket.emit("drawing", {
       x: newX,
       y: newY,
-      stroke: context.lineWidth,
-      color: context.strokeStyle,
+      stroke: color,
+      color: thickness,
     });
   }
 };
