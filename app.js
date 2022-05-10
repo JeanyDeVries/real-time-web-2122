@@ -75,12 +75,12 @@ io.on('connection', (socket) => {
   socket.on("newRound", () => {
     if(users.length >= 2){
       activePlayer = users[Math.floor(Math.random() * users.length)].id;
-    
+
+      io.emit("answer", randomAnimal);
       io.emit("activePlayer", activePlayer);
       console.log("De actieve speler is: ", activePlayer);
     }
 
-    io.emit("newWord", randomAnimal);
   });
 
   socket.on('disconnect', () => {
@@ -104,8 +104,6 @@ function formatMessages(username, text){
 function checkIfMessageCorrect(message, user){
   console.log(randomAnimal)
   if(message === randomAnimal){
-    console.log("correct")
-    console.log("MESSAGE : " + message + "ANSWER : " + randomAnimal)
     io.emit('message', formatMessages("BOT", `${user} is correct!`))
     return true;
   }

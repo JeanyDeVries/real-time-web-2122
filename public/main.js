@@ -39,6 +39,7 @@ var lastEvent;
 var mayDraw = false;
 var drawingColor;
 var drawingThickness;
+var answerText;
 
 let x = 0, y = 0;
 let isMouseDown = false;
@@ -82,6 +83,7 @@ socket.on("activePlayer", (playerId) => {
     mayDraw = true;
     controls.classList.remove("hidden")
     answer.classList.remove("hidden")
+    answer.innerHTML = answerText
 
     canvas.addEventListener("mousedown", startDrawing, false);
     canvas.addEventListener("mousemove", throttle(onMouseMove, 1), false);
@@ -102,6 +104,10 @@ socket.on("activePlayer", (playerId) => {
     answer.classList.add("hidden")
   }
 });
+
+socket.on("answer", (answer) =>{
+  answerText = answer;
+})
 
 // Stap 1, begin met tekenen
 const startDrawing = (event) => {
