@@ -71,14 +71,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on("newRound", () => {
-    if(users.length >= 2){
-      activePlayer = users[Math.floor(Math.random() * users.length)].id;
-
-      io.emit("answer", randomAnimal);
-      io.emit("activePlayer", activePlayer);
-      console.log("De actieve speler is: ", activePlayer);
-    }
-
+    newRound();
   });
 
   socket.on('disconnect', () => {
@@ -101,6 +94,7 @@ function formatMessages(username, text){
 
 function checkIfMessageCorrect(message, user){
   if(message === randomAnimal && user.id !== activePlayer){
+    newRound();
     io.emit('message', formatMessages("BOT", `${user.username.username} is correct!`))
     return true;
   }
@@ -136,4 +130,18 @@ async function getAnimalData(){
   randomAnimal = animals.data[randomNumber].Name;
 
   return randomAnimal;
+}
+
+function newRound(){
+  if(users.length >= 2){
+    activePlayer = users[Math.floor(Math.random() * users.length)].id;
+
+    getAnimalData().then( data => {
+      randomAnimal = data;
+      io.emit("answer", randomAnimal);
+      console.log(randomAnimal)
+      io.emit("activePlayer", activePlayer);
+      console.log("De actieve speler is: ", activePlayer);
+    });
+  }
 }
