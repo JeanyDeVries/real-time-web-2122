@@ -3,6 +3,7 @@
 ## Table of Contents
 - [Description](#description)
 - [Clone](#clone)
+- [Functions](#functions)
 - [Sockets](#sockets)
 - [API](#api)
 - [Data flow diagram](#dfd)
@@ -18,6 +19,17 @@ This is a real time web where you as a user can draw or guess pictures, dependin
 ```
   $ git clone https://github.com/JeanyDeVries/real-time-web-2122.git
 ```
+  
+## Functions <a name="functions">
+My app is still not totally complete and I want to add some other functions to my app as well. But here are the functions I added and that I want to add: 
+
+|                                                                   |     |
+| ----------------------------------------------------------------- | --- |
+| Drawing                                          | ✔   |
+| Chating                                          | ✔   |
+| Guessing the word                                | ✔   |
+| Random cat/dog facts                             |      |
+| Fun character making login                       |      |
 
 ## Sockets <a name="sockets">
 To make the app a realtime app, I used sockets. Sockets are ideal for retrieving and sending data between the users who are connected. This way when I draw on the canvas I can also draw it using sockets. That way the other users can see it as well. 
@@ -116,7 +128,7 @@ But this all happens locally. So how do I send the answer/random animal to the o
 I made a data flow diagram to show which requests are being made, normal and sockets request. This will give a clear insight of how my app works. 
   
 ![image](https://user-images.githubusercontent.com/44086608/167709752-2c40d872-d93a-4d8f-9487-629b4ad8ab10.png)
-
+  
   
 ## Issues <a name="Issues">
 If you see any issues in my code or spots that need improvements let me know. You can file an issue in this repository. Thank you!
