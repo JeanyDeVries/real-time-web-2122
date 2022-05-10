@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
   socket.on('chatMessage', message =>{
     const user = getCurrentUser(socket.id);
 
-    var isCorrect = checkIfMessageCorrect(message, user.username.username);
+    var isCorrect = checkIfMessageCorrect(message, user);
 
     if(!isCorrect)
       io.emit('message', formatMessages(user.username.username , message))
@@ -100,9 +100,8 @@ function formatMessages(username, text){
 }
 
 function checkIfMessageCorrect(message, user){
-  console.log(randomAnimal)
-  if(message === randomAnimal){
-    io.emit('message', formatMessages("BOT", `${user} is correct!`))
+  if(message === randomAnimal && user.id !== activePlayer){
+    io.emit('message', formatMessages("BOT", `${user.username.username} is correct!`))
     return true;
   }
 
