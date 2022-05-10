@@ -28,9 +28,7 @@ var animals;
 app.get("/chat", (req, res)=>{
 
    getAnimalData().then( randomAnimal => {
-    res.render('chat',{
-      animal: randomAnimal
-    })
+    res.render('chat',{ })
   });
 })
 
