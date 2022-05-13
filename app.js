@@ -5,7 +5,6 @@ const server = require('http').createServer(app)
 const path = require('path')
 const io = require('socket.io')(server)
 const port = process.env.PORT || 4242
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args))
 
 const { createClient } =  require('@supabase/supabase-js');
 const supabaseUrl = 'https://cpytdjbqlpwemxucrspz.supabase.co'
@@ -76,7 +75,7 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     const user = getCurrentUser(socket.id);
-    users.splice(users.indexOf(socket.id), 1); // 2nd parameter means remove one item only
+    users.splice(users.indexOf(socket.id), 1); // Remove the user who disconnected from the array
     io.emit('message', formatMessages("BOT", `${user.username.username} has left the room`))  
   })
 })
@@ -93,7 +92,7 @@ function formatMessages(username, text){
 }
 
 function checkIfMessageCorrect(message, user){
-  if(message === randomAnimal && user.id !== activePlayer){
+  if(message === randomAnimal && user.id !== activePlayer){ // If the message is correct + you are not the one who is drawing
     newRound();
     io.emit('message', formatMessages("BOT", `${user.username.username} is correct!`))
     return true;
@@ -133,14 +132,14 @@ async function getAnimalData(){
 }
 
 function newRound(){
-  if(users.length >= 2){
-    activePlayer = users[Math.floor(Math.random() * users.length)].id;
+  if(users.length >= 2){ // Only make a active player when there are more than 2 players in the room
+    activePlayer = users[Math.floor(Math.random() * users.length)].id; // Make a new active player randomly
 
     getAnimalData().then( data => {
       randomAnimal = data;
-      io.emit("answer", randomAnimal);
+      io.emit("answer", randomAnimal); // Give the answer to all the sockets 
       console.log(randomAnimal)
-      io.emit("activePlayer", activePlayer);
+      io.emit("activePlayer", activePlayer); // Give the active player to all the sockets 
       console.log("De actieve speler is: ", activePlayer);
     });
   }

@@ -12,7 +12,7 @@ socket.emit("newRound");
 document.querySelector('form').addEventListener('submit', event => {
   event.preventDefault()
   if (input.value) {
-    socket.emit('chatMessage', input.value)
+    socket.emit('chatMessage', input.value) //If there is input emit the input to the sockets
     input.value = ''
   }
 })
@@ -80,12 +80,14 @@ context.lineCap = "round";
 
 socket.on("activePlayer", (playerId) => {
   context.clearRect(0, 0, canvas.width, canvas.height);
-  if (socket.id == playerId) {
+  if (socket.id == playerId) { //if you are the player
     mayDraw = true;
+    // Show the drawing options and answer
     controls.classList.remove("hidden")
     answer.classList.remove("hidden")
     answer.innerHTML = answerText
 
+    // Add the option to draw
     canvas.addEventListener("mousedown", startDrawing, false);
     canvas.addEventListener("mousemove", throttle(onMouseMove, 1), false);
     canvas.addEventListener("mouseup", stopDrawing, false);
@@ -93,14 +95,15 @@ socket.on("activePlayer", (playerId) => {
     console.log("Jij bent de actieve speler");
   } else {
     mayDraw = false;
+    // Remove the option to draw
     canvas.removeEventListener("mousedown", startDrawing, false);
     canvas.removeEventListener("mousemove", throttle(onMouseMove, 1), false);
     canvas.removeEventListener("mouseup", stopDrawing, false);
     canvas.removeEventListener("mouseout", stopDrawing, false);    
     
+    // Hide the drawing options and answer
     if(controls.classList.contains("hidden"))
       return; 
-
     controls.classList.add("hidden")
     answer.classList.add("hidden")
   }
@@ -111,9 +114,8 @@ socket.on("answer", (answer) =>{
   answerText = answer;
 })
 
-// Stap 1, begin met tekenen
 const startDrawing = (event) => {
-  socket.emit("start", [event.offsetX, event.offsetY]);
+  socket.emit("start", [event.offsetX, event.offsetY]); // Send the coordinates to all the sockets where to start drawing
 };
 
 socket.on("start", (coord) => {
@@ -121,10 +123,9 @@ socket.on("start", (coord) => {
   [x, y] = coord;
 });
 
-// Stap 2, stop met tekenen
 
 const stopDrawing = (e) => {  
-  socket.emit("stop", [e.offsetX, e.offsetY]);
+  socket.emit("stop", [e.offsetX, e.offsetY]); // Send the coordinates to all the sockets where to stop drawing
 };
 
 socket.on('stop', (coord)=>{
@@ -132,12 +133,11 @@ socket.on('stop', (coord)=>{
   isMouseDown = false;
 })
 
-// Stap 3, teken een lijn als de muis beweegt
 
 const onMouseMove = (e) => {
-  var draw = {coord: [e.offsetX, e.offsetY], drawingColor, drawingThickness}
-
-  socket.emit("move", draw);
+  var draw = {coord: [e.offsetX, e.offsetY], drawingColor, drawingThickness} 
+ 
+  socket.emit("move", draw); // Send the info that you need to draw the line to all sockets
 };
 
 socket.on('move', (draw)=>{
@@ -162,7 +162,7 @@ const drawLine = (event, color, thickness) => {
     x = newX;
     y = newY;
 
-    socket.emit("drawing", {
+    socket.emit("drawing", { //Send the drawing to all the users with sockets
       x: newX,
       y: newY,
       stroke: color,
