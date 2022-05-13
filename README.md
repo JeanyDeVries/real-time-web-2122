@@ -26,7 +26,7 @@ My app is still not totally complete and I want to add some other functions to m
 |                                                                   |     |
 | ----------------------------------------------------------------- | --- |
 | Drawing                                          | ✔   |
-| Chating                                          | ✔   |
+| Chatting                                         | ✔   |
 | Guessing the word                                | ✔   |
 | Random cat/dog facts                             |      |
 | Fun character making login                       |      |
